@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Gochi+Hand');
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+.background {
+    background-image: url(/img/clair.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+}
+
+.todo {
+    width: 70%;
+    margin-top: 10%;
+}
+
+.titre {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.titre-text {
+    transform: rotate(2deg);
+    padding: 0.2rem 1.2rem;
+    border-radius: 20% 5% 20% 5%/5% 20% 25% 20%;
+    background-color: #317F8A;
+    font-size: 1.5rem;
+}
+
+.titre-img {
+    width: 24%;
+}
+
+h1 {
+    color: white;
+    font-size: 40px;
+    font-family: "Roboto", sans-serif;
+    padding-bottom: 1%;
+}
+
+input {
+    border: none;
+    height: 30px;
+    width: 40%;
+    background-color: rgba(0, 0, 0, 0.379);
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+}
+
+#enter button {
+    border: none;
+    height: 32px;
+    width: 5%;
+    cursor: pointer;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+#enter button:hover {
+    background-color: #317F8A;
+}
+
+#enter label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: 'Gochi Hand', cursive;
+    color: rgba(0, 0, 0, 0.477);
+}
+
+span {
+    cursor: pointer;
+    margin-left: 25px;
+    /* background-color: #317F8A; */
+}
+
+.checked {
+    position: relative;
+    cursor: pointer;
+    text-decoration: line-through;
+}
+
+.checked::after {
+    content: "";
+    position: absolute;
+}
+
+#listTodo {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    max-height: 500px; 
+    overflow-y: auto; 
+    width: 350px;
+    margin-left: 23%;
+}
+
+#listTodo i {
+    font-size: 12px;
+}
+
+#listTodo li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.189);
+    border-radius: 15px;
+    padding: 8px 10px; 
+    margin: 5px 0;
+    cursor: pointer;
+    border: 2px solid rgba(0, 0, 0, 0.799);
+}
