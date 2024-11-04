@@ -1,87 +1,57 @@
-const listTodo = document.getElementById("listTodo")
-const addTodo = document.getElementById("addTodo")
-const input = document.getElementById("tache")
+const listTodo = document.getElementById("listTodo");
+const addTodo = document.getElementById("addTodo");
+const input = document.getElementById("tache");
 
-
-/* function addTache() {
-    if (input.value == "") {
-        alert("No stain added")
-    } else {
-        let li = document.createElement('li')
-        li.innerHTML = input.value
-        li.style.fontSize = "18px"
-        li.style.color = "Black"
-        li.style.fontFamily = 'Gochi Hand'
-        li.addEventListener("click", function () {
-            li.classList.toggle("checked")
-            save()
-        })
-        let span = document.createElement('span')
-        span.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
-        li.appendChild(span)
-        span.addEventListener("click", function () {
-            li.remove()
-            save()
-        })
-        listTodo.appendChild(li)
-        console.log(listTodo);
-        save()
-    }
-} */
 function addTache() {
-    if (tache.value == "") {
-        alert("No stain added")
+    if (input.value === "") {
+        alert("No task added");
     } else {
         let liTemplate = `
-            <li class= "list">
-                ${ tache.value }
-        <span class="span-close">X</span>
-            </li > `
-        listTodo.innerHTML += liTemplate
+            <li class="list">
+                ${input.value}
+                <span class="span-close" onclick="deleteTache(this)">
+                    <i class="fa-solid fa-trash"></i>
+                </span>
+            </li>`;
+        listTodo.innerHTML += liTemplate;
     }
-    tache.value = "";
+    input.value = "";
     save();
 }
+
+function deleteTache(element) {
+    if (confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')) {
+        element.parentElement.remove(); // Supprime l'élément <li> parent du DOM
+        save();
+    }
+}
+
+// Marquer une tâche comme terminée et gérer la suppression
 listTodo.addEventListener("click", function(event) {
-    console.log(event);
     if (event.target.tagName === "LI") {
         event.target.classList.toggle("checked");
         save();
     }
-    else if (event.target.tagName === "SPAN") {
-        event.target.parentElement.remove();
-        save();
-    }
-})
+});
 
-/* function save() {
-    localStorage.setItem("save", listTodo.innerHTML)
-}
-
-save()
-function load() {
-    listTodo.innerHTML = localStorage.getItem("save")
-    let liElements = document.getElementsByClassName('li')
-    let spanElements = document.getElementsByClassName('span')
-    for (let i = 0; i < liElements.length; i++) {
-        let li = liElements[i]
-        let span = spanElements[i]
-        li.addEventListener("click", function () {
-            li.classList.toggle("checked");
-            save();
-        });
-        span.addEventListener("click", function () {
-            li.remove();
-            save();
-        });
-    }
-}
-load() */
+// Sauvegarde dans le localStorage
 function save() {
     localStorage.setItem("save", listTodo.innerHTML);
 }
 
+// Chargement depuis le localStorage avec ajout des gestionnaires d'événements
 function load() {
-    listTodo.innerHTML = localStorage.getItem("save");
+    const savedTasks = localStorage.getItem("save");
+    if (savedTasks) {
+        listTodo.innerHTML = savedTasks;
+        // Réattribuer les événements `onclick` pour chaque bouton de suppression
+        document.querySelectorAll(".span-close").forEach(button => {
+            button.onclick = function() {
+                deleteTache(button);
+            };
+        });
+    }
 }
+
+// Charger les tâches enregistrées au démarrage
 load();
